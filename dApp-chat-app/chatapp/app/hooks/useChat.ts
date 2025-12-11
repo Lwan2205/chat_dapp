@@ -50,8 +50,8 @@ export const useChat = () => {
             throw new Error('MetaMask not installed');
         }
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         providerRef.current = provider;
 
         const contract = new ethers.Contract(
@@ -73,7 +73,7 @@ export const useChat = () => {
      * @param username - Username to register
      */
     const createUser = useCallback(
-        async (username: string): Promise<ethers.providers.TransactionResponse | null> => {
+        async (username: string): Promise<any> => {
             try {
                 if (!username.trim()) throw new Error('Username cannot be empty');
                 if (username.length > 50) throw new Error('Username too long (max 50 chars)');
@@ -96,7 +96,7 @@ export const useChat = () => {
      * @param newName - New username
      */
     const updateProfile = useCallback(
-        async (newName: string): Promise<ethers.providers.TransactionResponse | null> => {
+        async (newName: string): Promise<any> => {
             try {
                 const contract = await getContract();
                 const tx = await contract.updateProfile(newName);
@@ -186,7 +186,7 @@ export const useChat = () => {
      * @param friendName - Display name for friend
      */
     const addFriend = useCallback(
-        async (friendAddress: string, friendName: string): Promise<ethers.providers.TransactionResponse | null> => {
+        async (friendAddress: string, friendName: string): Promise<any> => {
             try {
                 const contract = await getContract();
                 const tx = await contract.addFriend(friendAddress, friendName);
@@ -313,7 +313,7 @@ export const useChat = () => {
             friendAddress: string,
             messageIndex: number,
             newContent: string
-        ): Promise<ethers.providers.TransactionResponse | null> => {
+        ): Promise<any> => {
             try {
                 const contract = await getContract();
                 const tx = await contract.editMessage(friendAddress, messageIndex, newContent);
@@ -333,7 +333,7 @@ export const useChat = () => {
      * @param messageIndex - Index in conversation
      */
     const deleteMessage = useCallback(
-        async (friendAddress: string, messageIndex: number): Promise<ethers.providers.TransactionResponse | null> => {
+        async (friendAddress: string, messageIndex: number): Promise<any> => {
             try {
                 const contract = await getContract();
                 const tx = await contract.deleteMessage(friendAddress, messageIndex);
