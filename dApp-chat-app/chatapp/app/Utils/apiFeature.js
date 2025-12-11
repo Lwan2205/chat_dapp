@@ -1,17 +1,17 @@
-import {ethers} from 'ethers';
+import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
-import {chatAppAddress, chatAppAbi} from '../context/constants';
+import { chatAppAddress, chatAppAbi } from '../context/constants';
 
 export const checkIfWalletIsConnected = async () => {
     try {
         if (!window.ethereum) console.log("Install/Connect to Metamask");
         const accounts = await window.ethereum.request({
-             method:'eth_accounts'
+            method: 'eth_accounts'
         })
 
         return accounts[0];
-        
-    } catch(err) {
+
+    } catch (err) {
         console.log(err);
     }
 }
@@ -28,11 +28,11 @@ export const connectWallet = async () => {
             const accounts = await window.ethereum.request({
                 method: 'eth_accounts'
             });
-            
+
             if (accounts && accounts.length > 0) {
                 return accounts[0];  // Return the connected account
             }
-            
+
             console.log("MetaMask is already processing a request. Please reload the page and try again.");
             return null;  // Return null or handle the situation
         }
@@ -78,7 +78,7 @@ export const connectingWithContract = async () => {
 
 export const convertTime = (time) => {
     const newTime = new Date(time.toNumber());
-    const realTime = newTime.getHours() + '/' + newTime.getMinutes() + '/' + 
-    newTime.getSeconds() + ' Date: ' + newTime.getDate() + '/' + (newTime.getMonth() + 1) + '/' + newTime.getFullYear();
+    const realTime = newTime.getHours() + '/' + newTime.getMinutes() + '/' +
+        newTime.getSeconds() + ' Date: ' + newTime.getDate() + '/' + (newTime.getMonth() + 1) + '/' + newTime.getFullYear();
     return realTime;
 }
