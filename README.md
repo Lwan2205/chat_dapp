@@ -59,6 +59,7 @@ Mở [http://localhost:3000](http://localhost:3000) trong browser.
    - Truy cập: https://www.sepoliafaucet.io/
    - Paste địa chỉ ví MetaMask
    - Claim TestETH
+   - Link hướng dẫn các cách lấy free:https://www.youtube.com/watch?v=uHVBeqEyMbo&list=WL&index=1
 
 ### BƯỚC 2: Test Kết Nối Ví
 
